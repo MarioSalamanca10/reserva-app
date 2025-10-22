@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Reserva Horarios</title>
+</head>
+<body>
+    <header>
+        <h1>Bienvenido Username</h1>
+    </header>
+    <main>
+        <form action="submit" method="post" id="reservas">
+            <div class="txt_nombre">
+                <label for="nombre">Ingrese el nombre del estudiante</label>
+                <input type="text" name="nombre" id="nombre" placeholder="" required>    
+            </div>
+            <div class="picklist_ciclo">
+                <label for="ciclos">Ingrese el ciclo al que corresponde el estudiante</label>
+                <select name="ciclos" id="ciclos" required>
+                    <option value="s">Seleccione una opción</option>
+                    <option value="pre">Preescolar</option>
+                    <option value="pb">Primaria Baja</option>
+                    <option value="pa">Primaria Alta</option>
+                    <option value="em">Escuela Media</option>
+                    <option value="ea">Escuela Alta</option>
+                </select>
+            </div>
+            <div class="picklist_grado">
+                <label for="grados">Ingrese el grado</label>
+                <select name="grados" id="grados" required>
+                    <option value="">Seleccione una opción</option>
+                </select>
+            </div>
+
+            <div class="picklist_curso">
+                <label for="cursos">Ingrese el curso</label>
+                <select name="cursos" id="cursos" required>
+                    <option value="">Seleccione una opción</option>
+                </select>
+            </div>
+            <div class="picklist_horario">
+                <label for="horas">Ingrese el horario de si preferencia</label>
+                <select name="horas" id="horas" required>
+                    <option value="">Seleccione una opción</option>
+                </select>
+            </div>
+            <button type="submit" > Reservar </button>                      
+        </form>
+    </main>
+
+    <script src="dependencias.js"></script>
+    
+</body>
+</html>

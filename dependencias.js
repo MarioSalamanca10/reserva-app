@@ -1,10 +1,16 @@
+
+// URL del backend en Render
+const API_URL = "https://reserva-app-1.onrender.com";
+
+// Datos estáticos
 const lista_ciclos = {
-    pre : ["Pioneros", "First Garten", "Garten", "Transition"],
-    pb : ["Primero", "Segundo", "Tercero"],
-    pa : ["Cuarto", "Quinto"],
-    em : ["Sexto", "Septimo"],
-    ea : ["Octavo", "Noveno", "Decimo", "Once"]
-}
+    pre: ["Pioneros", "First Garten", "Garten", "Transition"],
+    pb: ["Primero", "Segundo", "Tercero"],
+    pa: ["Cuarto", "Quinto"],
+    em: ["Sexto", "Septimo"],
+    ea: ["Octavo", "Noveno", "Decimo", "Once"]
+};
+
 const lista_cursos = {
     "Pioneros": ["Pioneros"],
     "First Garten": ["A", "B"],
@@ -21,30 +27,28 @@ const lista_cursos = {
     "Noveno": ["A", "B", "C", "D"],
     "Decimo": ["A", "B", "C"],
     "Once": ["A", "B", "C"]
-}
+};
 
-const HorasDisponibles = ["8:20 AM", "8:40 AM", "9:00 AM", 
-    "9:20 AM", "9:40 AM", "10:20 AM", "10:40 AM", "11:00 AM", 
-    "11:20 AM", "11:40 AM", "12:00 M", "12:20 PM", "12:40 PM", 
-    "2:00 PM", "2:20 PM", "2:40 PM", "3:00 PM", "3:20 PM"];
+const HorasDisponibles = [
+    "8:20 AM", "8:40 AM", "9:00 AM", "9:20 AM", "9:40 AM",
+    "10:20 AM", "10:40 AM", "11:00 AM", "11:20 AM", "11:40 AM",
+    "12:00 M", "12:20 PM", "12:40 PM", "2:00 PM", "2:20 PM",
+    "2:40 PM", "3:00 PM", "3:20 PM"
+];
 
-
-
-
+// Referencias a elementos del DOM
 const selectCiclos = document.getElementById("ciclos");
 const selectGrados = document.getElementById("grados");
 const selectCursos = document.getElementById("cursos");
 const selectHoras = document.getElementById("horas");
 const selectForm = document.getElementById("reservas");
 
-
-
-selectCiclos.addEventListener("change", function() {
-
+// Llenar grados según ciclo
+selectCiclos.addEventListener("change", () => {
     const cicloSeleccionado = selectCiclos.value;
-    selectGrados.innerHTML = '<option value="">Selecciona un grado</option>'
+    selectGrados.innerHTML = '<option value="">Selecciona un grado</option>';
 
-    if(lista_ciclos[cicloSeleccionado]){
+    if (lista_ciclos[cicloSeleccionado]) {
         lista_ciclos[cicloSeleccionado].forEach(grado => {
             const opcion = document.createElement("option");
             opcion.value = grado;
@@ -52,52 +56,51 @@ selectCiclos.addEventListener("change", function() {
             selectGrados.appendChild(opcion);
         });
     }
-})
+});
 
-selectGrados.addEventListener("change", function(){
-
+// Llenar cursos según grado
+selectGrados.addEventListener("change", () => {
     const gradoSeleccionado = selectGrados.value;
     selectCursos.innerHTML = '<option value="">Selecciona un curso</option>';
 
-    if(lista_cursos[gradoSeleccionado]){
-        lista_cursos[gradoSeleccionado].forEach( curso => {
+    if (lista_cursos[gradoSeleccionado]) {
+        lista_cursos[gradoSeleccionado].forEach(curso => {
             const opcion = document.createElement("option");
             opcion.value = curso;
-            opcion.textContent= curso;
+            opcion.textContent = curso;
             selectCursos.appendChild(opcion);
-        })
+        });
     }
-})
+});
 
-selectCursos.addEventListener("change", async() => {
-
+// Llenar horas según ciclo, grado y curso
+selectCursos.addEventListener("change", async () => {
     const ciclo = selectCiclos.value;
     const grado = selectGrados.value;
     const curso = selectCursos.value;
 
-
     selectHoras.innerHTML = '<option value="">Selecciona una hora</option>';
 
-    if(ciclo && grado && curso ){
-        const response  = await fetch(`http://localhost:3000/horas?ciclo=${ciclo}&grado=${grado}&curso=${curso}`);
-        const horasReservadas = await response.json();
+    if (ciclo && grado && curso) {
+        try {
+            const response = await fetch(`${API_URL}/horas?ciclo=${ciclo}&grado=${grado}&curso=${curso}`);
+            const horasReservadas = await response.json();
 
-        
-        HorasDisponibles.forEach(hora => {
-            if (!horasReservadas.includes(hora)) {
-                const opcion = document.createElement("option");
-                opcion.value = hora;
-                opcion.textContent = hora;
-                selectHoras.appendChild(opcion);
-            }
-        });
-
+            HorasDisponibles.forEach(hora => {
+                if (!horasReservadas.includes(hora)) {
+                    const opcion = document.createElement("option");
+                    opcion.value = hora;
+                    opcion.textContent = hora;
+                    selectHoras.appendChild(opcion);
+                }
+            });
+        } catch (error) {
+            console.error("Error al cargar horas:", error);
+        }
     }
+});
 
-
-})
-
-
+// Enviar reserva al backend
 selectForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
@@ -109,12 +112,17 @@ selectForm.addEventListener("submit", async (e) => {
         hora: selectHoras.value
     };
 
-    const response = await fetch('http://localhost:3000/reservar', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-    });
+    try {
+        const response = await fetch(`${API_URL}/reservar`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        });
 
-    const result = await response.json();
-    alert(result.mensaje);
+        const result = await response.json();
+        alert(result.mensaje);
+    } catch (error) {
+        console.error("Error al enviar reserva:", error);
+    }
 });
+

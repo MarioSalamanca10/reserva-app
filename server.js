@@ -74,6 +74,32 @@ app.get('/reservas', (req, res) => {
 });
 
 
+// Listar todas las reservas
+app.get('/reservas', (req, res) => {
+  const rows = db.prepare('SELECT * FROM reservas ORDER BY id DESC').all();
+  res.json(rows);
+});
+
+// Eliminar reserva
+app.delete('/reservas/:id', (req, res) => {
+  const { id } = req.params;
+  const stmt = db.prepare('DELETE FROM reservas WHERE id = ?');
+  const info = stmt.run(id);
+  res.json({ mensaje: 'Reserva eliminada', cambios: info.changes });
+});
+
+// Editar reserva
+app.put('/reservas/:id', (req, res) => {
+  const { id } = req.params;
+  const { nombre, ciclo, grado, curso, hora } = req.body;
+  const stmt = db.prepare(`UPDATE reservas SET nombre = ?, ciclo = ?, grado = ?, curso = ?, hora = ? WHERE id = ?`);
+  const info = stmt.run(nombre, ciclo, grado, curso, hora, id);
+  res.json({ mensaje: 'Reserva actualizada', cambios: info.changes });
+});
+
+
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en puerto ${PORT}`);
 });
+
+

@@ -120,7 +120,14 @@ selectForm.addEventListener("submit", async (e) => {
         });
 
         const result = await response.json();
-        alert(result.mensaje);
+
+        if (response.status === 409) {
+            alert("Error: La hora ya está reservada por otra persona.");
+        } else {
+            alert(result.mensaje);
+            // Recargar horas después de reservar
+            selectCursos.dispatchEvent(new Event('change'));
+        }
     } catch (error) {
         console.error("Error al enviar reserva:", error);
     }

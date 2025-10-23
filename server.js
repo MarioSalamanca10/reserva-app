@@ -66,6 +66,14 @@ app.get('/reservas', (req, res) => {
   res.json(rows);
 });
 
+
+// Nueva ruta para listar todas las reservas
+app.get('/reservas', (req, res) => {
+  const rows = db.prepare('SELECT * FROM reservas').all();
+  res.json(rows);
+});
+
+
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en puerto ${PORT}`);
 });

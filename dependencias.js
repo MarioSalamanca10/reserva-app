@@ -122,7 +122,8 @@ selectForm.addEventListener("submit", async (e) => {
         const result = await response.json();
 
         if (response.status === 409) {
-            alert("Error: La hora ya está reservada por otra persona.");
+            msgError
+            alert("Te ganaron en reservar la Hora :'(  recarga la pagina y valida las horas disponibles nuevamente");
         } else {
             alert(result.mensaje);
             // Recargar horas después de reservar

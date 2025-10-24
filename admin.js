@@ -82,3 +82,68 @@ document.getElementById("filtroGrado").addEventListener("change", () => mostrarT
 document.getElementById("filtroCurso").addEventListener("change", () => mostrarTabla(reservasGlobal));
 
 cargarReservas();
+
+//edicion del modal
+
+let idEditar = null;
+
+function editar(id, nombre, ciclo, grado, curso, hora) {
+  idEditar = id;
+  document.getElementById("editNombre").value = nombre;
+  document.getElementById("editHora").value = hora;
+  llenarSelects(ciclo, grado, curso);
+  document.getElementById("modalEditar").style.display = "block";
+}
+
+function llenarSelects(ciclo, grado, curso) {
+  const cicloSelect = document.getElementById("editCiclo");
+  cicloSelect.innerHTML = "";
+  Object.keys(lista_ciclos).forEach(c => {
+    const opt = document.createElement("option");
+    opt.value = c;
+    opt.textContent = c;
+    if (c === ciclo) opt.selected = true;
+    cicloSelect.appendChild(opt);
+  });
+
+  const gradoSelect = document.getElementById("editGrado");
+  gradoSelect.innerHTML = "";
+  lista_ciclos[ciclo].forEach(g => {
+    const opt = document.createElement("option");
+    opt.value = g;
+    opt.textContent = g;
+    if (g === grado) opt.selected = true;
+    gradoSelect.appendChild(opt);
+  });
+
+  const cursoSelect = document.getElementById("editCurso");
+  cursoSelect.innerHTML = "";
+  lista_cursos[grado].forEach(cu => {
+    const opt = document.createElement("option");
+    opt.value = cu;
+    opt.textContent = cu;
+    if (cu === curso) opt.selected = true;
+    cursoSelect.appendChild(opt);
+  });
+}
+
+async function guardarEdicion() {
+  const nombre = document.getElementById("editNombre").value;
+  const ciclo = document.getElementById("editCiclo").value;
+  const grado = document.getElementById("editGrado").value;
+  const curso = document.getElementById("editCurso").value;
+  const hora = document.getElementById("editHora").value;
+
+  await fetch(`${API_URL}/reservas/${idEditar}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ nombre, ciclo, grado, curso, hora })
+  });
+  cerrarModal();
+  cargarReservas();
+}
+
+function cerrarModal() {
+  document.getElementById("modalEditar").style.display = "none";
+}
+

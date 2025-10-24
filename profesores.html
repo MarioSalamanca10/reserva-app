@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="profesores.css">
+  <title>Reservas Profesores</title>
+</head>
+<body>
+  <div class="container">
+    <h1>Reservas Asignadas</h1>
+    <div class="filters">
+      <label for="filtroGrado">Filtrar por grado:</label>
+      <select id="filtroGrado"></select>
+
+      <label for="filtroCurso">Filtrar por curso:</label>
+      <select id="filtroCurso"></select>
+    </div>
+
+    <table id="tablaReservas">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Ciclo</th>
+          <th>Grado</th>
+          <th>Curso</th>
+          <th>Hora</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  <script src="profesores.js"></script>
+</body>
+</html>

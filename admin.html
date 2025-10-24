@@ -28,6 +28,21 @@
     <tbody></tbody>
   </table>
 
+  
+<div id="modalEditar" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5);">
+    <div style="background:#fff; padding:20px; margin:100px auto; width:400px; border-radius:8px;">
+      <h2>Editar Reserva</h2>
+      <input type="text" id="editNombre" placeholder="Nombre">
+      <select id="editCiclo"></select>
+      <select id="editGrado"></select>
+      <select id="editCurso"></select>
+      <input type="text" id="editHora" placeholder="Hora">
+      <button onclick="guardarEdicion()">Guardar</button>
+      <button onclick="cerrarModal()">Cancelar</button>
+    </div>
+  </div>
+
+
   <script src="admin.js"></script>
 </body>
 </html>

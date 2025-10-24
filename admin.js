@@ -1,4 +1,32 @@
 const API_URL = "https://reserva-app-1.onrender.com";
+
+const lista_ciclos = {
+    pre: ["Pioneros", "First Garten", "Garten", "Transition"],
+    pb: ["Primero", "Segundo", "Tercero"],
+    pa: ["Cuarto", "Quinto"],
+    em: ["Sexto", "Septimo"],
+    ea: ["Octavo", "Noveno", "Decimo", "Once"]
+};
+
+const lista_cursos = {
+    "Pioneros": ["Pioneros"],
+    "First Garten": ["A", "B"],
+    "Garten": ["A", "B", "C", "D"],
+    "Transition": ["A", "B", "C", "D"],
+    "Primero": ["A", "B", "C", "D", "E", "F"],
+    "Segundo": ["A", "B", "C", "D", "E", "F"],
+    "Tercero": ["A", "B", "C", "D", "E", "F"],
+    "Cuarto": ["A", "B", "C", "D", "E", "F", "G"],
+    "Quinto": ["A", "B", "C", "D", "E", "F"],
+    "Sexto": ["A", "B", "C", "D", "E"],
+    "Septimo": ["A", "B", "C", "D"],
+    "Octavo": ["A", "B", "C", "D"],
+    "Noveno": ["A", "B", "C", "D"],
+    "Decimo": ["A", "B", "C"],
+    "Once": ["A", "B", "C"]
+};
+
+
 let reservasGlobal = [];
 
 async function cargarReservas() {

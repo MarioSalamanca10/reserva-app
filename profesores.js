@@ -1,6 +1,8 @@
 
+
 const API_URL = "https://reserva-app-1.onrender.com";
 
+// Listas globales para grados y cursos
 const lista_ciclos = {
   pre: ["Pioneros", "First Garten", "Garten", "Transition"],
   pb: ["Primero", "Segundo", "Tercero"],
@@ -29,6 +31,7 @@ const lista_cursos = {
 
 let reservasGlobal = [];
 
+// ✅ Cargar todas las reservas desde el backend
 async function cargarReservas() {
   const response = await fetch(`${API_URL}/reservas`);
   reservasGlobal = await response.json();
@@ -36,14 +39,12 @@ async function cargarReservas() {
   mostrarTabla(reservasGlobal);
 }
 
+// ✅ Generar filtros dinámicos
 function generarFiltros() {
   const filtroGrado = document.getElementById("filtroGrado");
   const filtroCurso = document.getElementById("filtroCurso");
 
   filtroGrado.innerHTML = '<option value="">Todos</option>';
-  filtroCurso.innerHTML = '<option value="">Todos</option>';
-
-  // Agregar todos los grados
   Object.values(lista_ciclos).flat().forEach(g => {
     const opt = document.createElement("option");
     opt.value = g;
@@ -51,15 +52,31 @@ function generarFiltros() {
     filtroGrado.appendChild(opt);
   });
 
-  // Agregar todos los cursos
-  Object.values(lista_cursos).flat().forEach(c => {
-    const opt = document.createElement("option");
-    opt.value = c;
-    opt.textContent = c;
-    filtroCurso.appendChild(opt);
-  });
+  filtroCurso.innerHTML = '<option value="">Todos</option>'; // Inicialmente vacío
 }
 
+// ✅ Actualizar cursos cuando cambia el grado
+document.getElementById("filtroGrado").addEventListener("change", () => {
+  const gradoSeleccionado = document.getElementById("filtroGrado").value;
+  const filtroCurso = document.getElementById("filtroCurso");
+  filtroCurso.innerHTML = '<option value="">Todos</option>';
+
+  if (gradoSeleccionado && lista_cursos[gradoSeleccionado]) {
+    lista_cursos[gradoSeleccionado].forEach(c => {
+      const opt = document.createElement("option");
+      opt.value = c;
+      opt.textContent = c;
+      filtroCurso.appendChild(opt);
+    });
+  }
+
+  mostrarTabla(reservasGlobal);
+});
+
+// ✅ Filtrar por curso
+document.getElementById("filtroCurso").addEventListener("change", () => mostrarTabla(reservasGlobal));
+
+// ✅ Mostrar tabla con filtros aplicados
 function mostrarTabla(reservas) {
   const gradoFiltro = document.getElementById("filtroGrado").value;
   const cursoFiltro = document.getElementById("filtroCurso").value;
@@ -81,8 +98,5 @@ function mostrarTabla(reservas) {
       tbody.appendChild(fila);
     });
 }
-
-document.getElementById("filtroGrado").addEventListener("change", () => mostrarTabla(reservasGlobal));
-document.getElementById("filtroCurso").addEventListener("change", () => mostrarTabla(reservasGlobal));
 
 cargarReservas();

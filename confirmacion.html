@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Reserva Completada</title>
+</head>
+<body>
+  <div class="card">
+    <h1>¡Reserva Completada!</h1>
+    <p><strong>Nombre:</strong> <span id="nombre"></span></p>
+    <p><strong>Ciclo:</strong> <span id="ciclo"></span></p>
+    <p><strong>Grado:</strong> <span id="grado"></span></p>
+    <p><strong>Curso:</strong> <span id="curso"></span></p>
+    <p><strong>Hora:</strong> <span id="hora"></span></p>
+    <button onclick="volver()">Reservar otra reunión</button>
+  </div>
+
+  <script>
+    // Obtener datos desde localStorage
+    const reserva = JSON.parse(localStorage.getItem('ultimaReserva'));
+    if (reserva) {
+      document.getElementById('nombre').textContent = reserva.nombre;
+      document.getElementById('ciclo').textContent = reserva.ciclo;
+      document.getElementById('grado').textContent = reserva.grado;
+      document.getElementById('curso').textContent = reserva.curso;
+      document.getElementById('hora').textContent = reserva.hora;
+    }
+
+    function volver() {
+      window.location.href = 'index.html'; // Página principal
+    }
+  </script>
+</body>
+</html>

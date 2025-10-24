@@ -112,25 +112,28 @@ selectForm.addEventListener("submit", async (e) => {
         hora: selectHoras.value
     };
 
-    try {
-        const response = await fetch(`${API_URL}/reservar`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
-        });
+try {
+    const response = await fetch(`${API_URL}/reservar`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    });
 
-        const result = await response.json();
-
-        if (response.status === 409) {
-            msgError
-            alert("Te ganaron en reservar la Hora :'(  recarga la pagina y valida las horas disponibles nuevamente");
-        } else {
-            alert(result.mensaje);
-            // Recargar horas después de reservar
-            selectCursos.dispatchEvent(new Event('change'));
-        }
-    } catch (error) {
-        console.error("Error al enviar reserva:", error);
+    if (response.status === 409) {
+        alert("La hora ya está reservada. Por favor, elige otra.");
+        return;
     }
+
+    const result = await response.json();
+
+    // ✅ Guardar datos en localStorage
+    localStorage.setItem('ultimaReserva', JSON.stringify(data));
+
+    // ✅ Redirigir a la página de confirmación
+    window.location.href = 'confirmacion.html';
+} catch (error) {
+    console.error("Error al enviar reserva:", error);
+}
+
 });
 

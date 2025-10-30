@@ -41,6 +41,7 @@ const selectCiclos = document.getElementById("ciclos");
 const selectGrados = document.getElementById("grados");
 const selectCursos = document.getElementById("cursos");
 const selectHoras = document.getElementById("horas");
+const selectModalidad = document.getElementById("modalidad").value;
 const selectForm = document.getElementById("reservas");
 
 // Llenar grados según ciclo
@@ -109,6 +110,7 @@ selectForm.addEventListener("submit", async (e) => {
         ciclo: selectCiclos.value,
         grado: selectGrados.value,
         curso: selectCursos.value,
+        modalidad: selectModalidad,
         hora: selectHoras.value
     };
 

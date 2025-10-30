@@ -13,6 +13,7 @@
     <p><strong>Ciclo:</strong> <span id="ciclo"></span></p>
     <p><strong>Grado:</strong> <span id="grado"></span></p>
     <p><strong>Curso:</strong> <span id="curso"></span></p>
+    <p><strong>Curso:</strong> <span id="modalidad"></span></p>
     <p><strong>Hora:</strong> <span id="hora"></span></p>
     <button onclick="volver()">Reservar otra reunión</button>
   </div>
@@ -25,6 +26,7 @@
       document.getElementById('ciclo').textContent = reserva.ciclo;
       document.getElementById('grado').textContent = reserva.grado;
       document.getElementById('curso').textContent = reserva.curso;
+      document.getElementById('modalidad').textContent = reserva.modalidad;
       document.getElementById('hora').textContent = reserva.hora;
     }
 

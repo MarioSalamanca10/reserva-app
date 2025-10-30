@@ -1,4 +1,5 @@
 
+
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
@@ -18,35 +19,36 @@ app.use(express.static(path.join(__dirname)));
 const dbPath = process.env.DB_PATH || '/data/database.db';
 const db = new Database(dbPath);
 
-// Crear tabla si no existe
+// Crear tabla si no existe (ahora incluye modalidad)
 db.prepare(`CREATE TABLE IF NOT EXISTS reservas (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   nombre TEXT,
   ciclo TEXT,
   grado TEXT,
   curso TEXT,
-  hora TEXT
+  hora TEXT,
+  modalidad TEXT
 )`).run();
 
 // ✅ Ruta para guardar reserva con validación
 app.post('/reservar', (req, res) => {
-  const { nombre, ciclo, grado, curso, hora } = req.body;
+  const { nombre, ciclo, grado, curso, hora, modalidad } = req.body;
 
-  if (!nombre || !ciclo || !grado || !curso || !hora) {
+  if (!nombre || !ciclo || !grado || !curso || !hora || !modalidad) {
     return res.status(400).json({ error: 'Faltan datos' });
   }
 
-  // Verificar si la hora ya está reservada
-  const checkStmt = db.prepare(`SELECT COUNT(*) AS count FROM reservas WHERE ciclo = ? AND grado = ? AND curso = ? AND hora = ?`);
-  const result = checkStmt.get(ciclo, grado, curso, hora);
+  // Verificar si la hora ya está reservada en esa modalidad
+  const checkStmt = db.prepare(`SELECT COUNT(*) AS count FROM reservas WHERE ciclo = ? AND grado = ? AND curso = ? AND hora = ? AND modalidad = ?`);
+  const result = checkStmt.get(ciclo, grado, curso, hora, modalidad);
 
   if (result.count > 0) {
-    return res.status(409).json({ error: 'La hora ya está reservada' });
+    return res.status(409).json({ error: 'La hora ya está reservada en esa modalidad' });
   }
 
   // Insertar si está libre
-  const stmt = db.prepare(`INSERT INTO reservas (nombre, ciclo, grado, curso, hora) VALUES (?, ?, ?, ?, ?)`);
-  const info = stmt.run(nombre, ciclo, grado, curso, hora);
+  const stmt = db.prepare(`INSERT INTO reservas (nombre, ciclo, grado, curso, hora, modalidad) VALUES (?, ?, ?, ?, ?, ?)`);
+  const info = stmt.run(nombre, ciclo, grado, curso, hora, modalidad);
 
   res.json({ mensaje: 'Reserva guardada', id: info.lastInsertRowid });
 });
@@ -60,23 +62,9 @@ app.get('/horas', (req, res) => {
   res.json(rows.map(row => row.hora));
 });
 
-// ✅ Ruta opcional para ver todas las reservas
+// ✅ Ruta para ver todas las reservas
 app.get('/reservas', (req, res) => {
   const rows = db.prepare(`SELECT * FROM reservas ORDER BY id DESC`).all();
-  res.json(rows);
-});
-
-
-// Nueva ruta para listar todas las reservas
-app.get('/reservas', (req, res) => {
-  const rows = db.prepare('SELECT * FROM reservas').all();
-  res.json(rows);
-});
-
-
-// Listar todas las reservas
-app.get('/reservas', (req, res) => {
-  const rows = db.prepare('SELECT * FROM reservas ORDER BY id DESC').all();
   res.json(rows);
 });
 
@@ -91,15 +79,15 @@ app.delete('/reservas/:id', (req, res) => {
 // Editar reserva
 app.put('/reservas/:id', (req, res) => {
   const { id } = req.params;
-  const { nombre, ciclo, grado, curso, hora } = req.body;
-  const stmt = db.prepare(`UPDATE reservas SET nombre = ?, ciclo = ?, grado = ?, curso = ?, hora = ? WHERE id = ?`);
-  const info = stmt.run(nombre, ciclo, grado, curso, hora, id);
+  const { nombre, ciclo, grado, curso, hora, modalidad } = req.body;
+  const stmt = db.prepare(`UPDATE reservas SET nombre = ?, ciclo = ?, grado = ?, curso = ?, hora = ?, modalidad = ? WHERE id = ?`);
+  const info = stmt.run(nombre, ciclo, grado, curso, hora, modalidad, id);
   res.json({ mensaje: 'Reserva actualizada', cambios: info.changes });
 });
-
 
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en puerto ${PORT}`);
 });
+
 
 

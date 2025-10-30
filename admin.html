@@ -22,7 +22,7 @@
   <table id="tablaReservas">
     <thead>
       <tr>
-        <th>Nombre</th><th>Ciclo</th><th>Grado</th><th>Curso</th><th>Hora</th><th>Acciones</th>
+        <th>Nombre</th><th>Ciclo</th><th>Grado</th><th>Curso</th><th>Hora</th><th>Modalidad</th><th>Acciones</th>
       </tr>
     </thead>
     <tbody></tbody>
@@ -35,7 +35,12 @@
       <input type="text" id="editNombre" placeholder="Nombre">
       <select id="editCiclo"></select>
       <select id="editGrado"></select>
-      <select id="editCurso"></select>
+      <select id="editCurso"></select>      
+      <label for="editModalidad">Modalidad</label>
+      <select id="editModalidad">
+        <option value="Presencial">Presencial</option>
+        <option value="Virtual">Virtual</option>
+      </select>
       <input type="text" id="editHora" placeholder="Hora">
       <button onclick="guardarEdicion()">Guardar</button>
       <button onclick="cerrarModal()">Cancelar</button>

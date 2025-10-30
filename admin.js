@@ -72,17 +72,20 @@ function mostrarTabla(reservas) {
     .filter(r => (!gradoFiltro || r.grado === gradoFiltro) && (!cursoFiltro || r.curso === cursoFiltro))
     .forEach(r => {
       const fila = document.createElement("tr");
-      fila.innerHTML = `
-        <td>${r.nombre}</td>
-        <td>${r.ciclo}</td>
-        <td>${r.grado}</td>
-        <td>${r.curso}</td>
-        <td>${r.hora}</td>
-        <td>
-          <button onclick="editar(${r.id}, '${r.nombre}', '${r.ciclo}', '${r.grado}', '${r.curso}', '${r.hora}')">Editar</button>
-          <button onclick="eliminar(${r.id})">Eliminar</button>
-        </td>
-      `;
+      
+fila.innerHTML = `
+  <td>${r.nombre}</td>
+  <td>${r.ciclo}</td>
+  <td>${r.grado}</td>
+  <td>${r.curso}</td>
+  <td>${r.hora}</td>
+  <td>${r.modalidad}</td>
+  <td>
+    <button onclick="editar(${r.id}, '${r.nombre}', '${r.ciclo}', '${r.grado}', '${r.curso}', '${r.hora}', '${r.modalidad}')">Editar</button>
+    <button onclick="eliminar(${r.id})">Eliminar</button>
+  </td>
+`;
+
       tbody.appendChild(fila);
     });
 }
@@ -94,17 +97,20 @@ async function eliminar(id) {
   }
 }
 
-function editar(id, nombre, ciclo, grado, curso, hora) {
+
+function editar(id, nombre, ciclo, grado, curso, hora, modalidad) {
   const nuevoNombre = prompt("Nuevo nombre:", nombre);
   const nuevaHora = prompt("Nueva hora:", hora);
-  if (nuevoNombre && nuevaHora) {
+  const nuevaModalidad = prompt("Nueva modalidad:", modalidad);
+  if (nuevoNombre && nuevaHora && nuevaModalidad) {
     fetch(`${API_URL}/reservas/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ nombre: nuevoNombre, ciclo, grado, curso, hora: nuevaHora })
+      body: JSON.stringify({ nombre: nuevoNombre, ciclo, grado, curso, hora: nuevaHora, modalidad: nuevaModalidad })
     }).then(() => cargarReservas());
   }
 }
+
 
 document.getElementById("filtroGrado").addEventListener("change", () => mostrarTabla(reservasGlobal));
 document.getElementById("filtroCurso").addEventListener("change", () => mostrarTabla(reservasGlobal));
@@ -115,8 +121,9 @@ cargarReservas();
 
 let idEditar = null;
 
-function editar(id, nombre, ciclo, grado, curso, hora) {
+function editar(id, nombre, ciclo, grado, curso, hora, modalidad) {
   idEditar = id;
+  document.getElementById("editModalidad").value = modalidad;
   document.getElementById("editNombre").value = nombre;
   document.getElementById("editHora").value = hora;
   llenarSelects(ciclo, grado, curso);
@@ -161,11 +168,12 @@ async function guardarEdicion() {
   const grado = document.getElementById("editGrado").value;
   const curso = document.getElementById("editCurso").value;
   const hora = document.getElementById("editHora").value;
+  const modalidad = document.getElementById("editModalidad").value;
 
   await fetch(`${API_URL}/reservas/${idEditar}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ nombre, ciclo, grado, curso, hora })
+    body: JSON.stringify({ nombre, ciclo, grado, curso, hora, modalidad })
   });
   cerrarModal();
   cargarReservas();

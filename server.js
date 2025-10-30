@@ -85,6 +85,17 @@ app.put('/reservas/:id', (req, res) => {
   res.json({ mensaje: 'Reserva actualizada', cambios: info.changes });
 });
 
+
+app.get('/modificar-db', (req, res) => {
+  try {
+    db.prepare('ALTER TABLE reservas ADD COLUMN modalidad TEXT').run();
+    res.send('Columna "modalidad" agregada correctamente.');
+  } catch (error) {
+    res.status(500).send('Error al modificar la base de datos: ' + error.message);
+  }
+});
+
+
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en puerto ${PORT}`);
 });

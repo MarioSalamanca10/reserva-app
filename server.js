@@ -75,6 +75,17 @@ app.put('/reservas/:id', (req, res) => {
   res.json({ mensaje: 'Reserva actualizada', cambios: info.changes });
 });
 
+
+app.post('/login', (req, res) => {
+  const { usuario, clave } = req.body;
+  if (usuario === 'Admin' && clave === 'Admin2410') {
+    res.json({ acceso: true });
+  } else {
+    res.status(401).json({ acceso: false });
+  }
+});
+
+
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en puerto ${PORT}`);
 });

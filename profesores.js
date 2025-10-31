@@ -38,14 +38,14 @@ function mostrarTabla(reservas) {
   tbody.innerHTML = "";
   reservas.forEach(r => {
     const fila = document.createElement("tr");
-    fila.innerHTML = `
-      <td>${r.nombre}</td>
-      <td>${r.ciclo}</td>
-      <td>${r.grado}</td>
-      <td>${r.curso}</td>
-      <td>${r.hora}</td>
-      <td>${r.modalidad}</td>
-    `;
+fila.innerHTML = `
+  <td>${r.nombre}</td>
+  <td>${r.ciclo}</td>
+  <td>${r.grado}</td>
+  <td>${r.curso}</td>
+  <td>${r.hora}</td>
+  <td>${r.modalidad}</td> 
+`;
     tbody.appendChild(fila);
   });
 }

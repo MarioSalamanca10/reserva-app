@@ -79,14 +79,15 @@ app.put('/reservas/:id', (req, res) => {
 
 app.post('/login', (req, res) => {
   const { usuario, clave } = req.body;
-  if (usuario === 'Admin' && clave === 'Admin2410') {
-    alert("acceso exitoso");
+  if (usuario === 'admin' && clave === '12345') {
+    console.log("acceso exitoso");
     res.json({ acceso: true });
   } else {
-    alert ("acceso denegado");
+    console.log("acceso denegado");
     res.status(401).json({ acceso: false });
   }
 });
+
 
 
 app.listen(PORT, () => {

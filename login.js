@@ -28,3 +28,4 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
     alert("Error de conexión con el servidor");
   }
 });
+

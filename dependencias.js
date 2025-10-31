@@ -1,14 +1,13 @@
-
 // URL del backend en Render
 const API_URL = "https://reserva-app-1.onrender.com";
 
 // Datos estáticos
 const lista_ciclos = {
-  pre: ["Pioneros", "First Garten", "Garten", "Transition"],
-  pb: ["Primero", "Segundo", "Tercero"],
-  pa: ["Cuarto", "Quinto"],
-  em: ["Sexto", "Septimo"],
-  ea: ["Octavo", "Noveno", "Decimo", "Once"]
+  Preescolar: ["Pioneros", "First Garten", "Garten", "Transition"],
+  Primaria_Baja: ["Primero", "Segundo", "Tercero"],
+  Primaria_Alta: ["Cuarto", "Quinto"],
+  Escuela_Media: ["Sexto", "Septimo"],
+  Escuela_Alta: ["Octavo", "Noveno", "Decimo", "Once"]
 };
 
 const lista_cursos = {
@@ -116,11 +115,10 @@ selectForm.addEventListener("submit", async (e) => {
     });
 
     if (response.status === 409) {
-      alert("La hora ya está reservada en esa modalidad. Por favor, elige otra.");
+      alert("La hora ya está reservada. Por favor, elige otra.");
       return;
     }
 
-    const result = await response.json();
     localStorage.setItem('ultimaReserva', JSON.stringify(data));
     window.location.href = 'confirmacion.html';
   } catch (error) {

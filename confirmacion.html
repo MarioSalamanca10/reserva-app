@@ -1,38 +1,28 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="confirmacion.css">
-  <title>Reserva Completada</title>
+  <title>Confirmación de Reserva</title>
+  confirmacion.css
 </head>
 <body>
-  <div class="card">
-    <h1>¡Reserva Completada!</h1>
-    <p><strong>Nombre:</strong> <span id="nombre"></span></p>
-    <p><strong>Ciclo:</strong> <span id="ciclo"></span></p>
-    <p><strong>Grado:</strong> <span id="grado"></span></p>
-    <p><strong>Curso:</strong> <span id="curso"></span></p>
-    <p><strong>Modalidad:</strong> <span id="modalidad"></span></p>
-    <p><strong>Hora:</strong> <span id="hora"></span></p>
-    <button onclick="volver()">Reservar otra reunión</button>
-  </div>
+  <h1>Reserva Confirmada</h1>
+  <p>Nombre: <span id="nombreConfirmacion"></span></p>
+  <p>Ciclo: <span id="cicloConfirmacion"></span></p>
+  <p>Grado: <span id="gradoConfirmacion"></span></p>
+  <p>Curso: <span id="cursoConfirmacion"></span></p>
+  <p>Hora: <span id="horaConfirmacion"></span></p>
+  <p>Modalidad: <span id="modalidadConfirmacion"></span></p>
+  index.htmlReservar otra</button>
 
   <script>
-    // Obtener datos desde localStorage
-    const reserva = JSON.parse(localStorage.getItem('ultimaReserva'));
-    if (reserva) {
-      document.getElementById('nombre').textContent = reserva.nombre;
-      document.getElementById('ciclo').textContent = reserva.ciclo;
-      document.getElementById('grado').textContent = reserva.grado;
-      document.getElementById('curso').textContent = reserva.curso;
-      document.getElementById('modalidad').textContent = reserva.modalidad;
-      document.getElementById('hora').textContent = reserva.hora;
-    }
-
-    function volver() {
-      window.location.href = 'index.html'; // Página principal
-    }
+    const reserva = JSON.parse(localStorage.getItem("ultimaReserva"));
+    document.getElementById("nombreConfirmacion").textContent = reserva.nombre;
+    document.getElementById("cicloConfirmacion").textContent = reserva.ciclo;
+    document.getElementById("gradoConfirmacion").textContent = reserva.grado;
+    document.getElementById("cursoConfirmacion").textContent = reserva.curso;
+    document.getElementById("horaConfirmacion").textContent = reserva.hora;
+    document.getElementById("modalidadConfirmacion").textContent = reserva.modalidad;
   </script>
 </body>
 </html>

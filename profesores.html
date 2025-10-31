@@ -3,21 +3,21 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="profesores.css">
-  <title>Reservas Profesores</title>
+  <title>Reservas por Profesor</title>
+  profesores.css
 </head>
 <body>
   <div class="container">
-    <h1>Reservas Asignadas</h1>
+    <h1>Reservas por Profesor</h1>
     <div class="filters">
-      <label for="filtroGrado">Filtrar por grado:</label>
-      <select id="filtroGrado"></select>
-
-      <label for="filtroCurso">Filtrar por curso:</label>
-      <select id="filtroCurso"></select>
+      <select id="filtroGrado">
+        <option value="">Todos los grados</option>
+      </select>
+      <select id="filtroCurso">
+        <option value="">Todos los cursos</option>
+      </select>
     </div>
-
-    <table id="tablaReservas">
+    <table>
       <thead>
         <tr>
           <th>Nombre</th>
@@ -25,11 +25,13 @@
           <th>Grado</th>
           <th>Curso</th>
           <th>Hora</th>
+          <th>Modalidad</th>
         </tr>
       </thead>
-      <tbody></tbody>
+      <tbody id="tablaReservas"></tbody>
     </table>
   </div>
-  <script src="profesores.js"></script>
+  profesores.js</script>
 </body>
 </html>
+

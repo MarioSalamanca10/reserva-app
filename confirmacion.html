@@ -6,14 +6,17 @@
   <title>Confirmación de Reserva</title>
 </head>
 <body>
-  <h1>Reserva Confirmada</h1>
-  <p>Nombre: <span id="nombreConfirmacion"></span></p>
-  <p>Ciclo: <span id="cicloConfirmacion"></span></p>
-  <p>Grado: <span id="gradoConfirmacion"></span></p>
-  <p>Curso: <span id="cursoConfirmacion"></span></p>
-  <p>Hora: <span id="horaConfirmacion"></span></p>
-  <p>Modalidad: <span id="modalidadConfirmacion"></span></p>
-  index.htmlReservar otra</button>
+  <div class="card">
+    <h1>Reserva Confirmada</h1>
+    <p>Nombre: <span id="nombreConfirmacion"></span></p>
+    <p>Ciclo: <span id="cicloConfirmacion"></span></p>
+    <p>Grado: <span id="gradoConfirmacion"></span></p>
+    <p>Curso: <span id="cursoConfirmacion"></span></p>
+    <p>Hora: <span id="horaConfirmacion"></span></p>
+    <p>Modalidad: <span id="modalidadConfirmacion"></span></p>
+    <button>Reservar otra reunion</button>
+  </div>
+  
 
   <script>
     const reserva = JSON.parse(localStorage.getItem("ultimaReserva"));

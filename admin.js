@@ -15,18 +15,19 @@ function mostrarTabla(reservas) {
   tbody.innerHTML = "";
   reservas.forEach(r => {
     const fila = document.createElement("tr");
-    fila.innerHTML = `
-      <td>${r.nombre}</td>
-      <td>${r.ciclo}</td>
-      <td>${r.grado}</td>
-      <td>${r.curso}</td>
-      <td>${r.hora}</td>
-      <td>${r.modalidad}</td>
-      <td>
-        <button onclick="editar(${r.id}, '${r.nombre}', '${r.ciclo}', '${r.grado}', '${r.curso}', '${r.hora}', '${r.modalidad}')">Editar</button>
-        <button onclick="eliminar(${r.id})">Eliminar</button>
-      </td>
-    `;
+fila.innerHTML = `
+  <td>${r.nombre}</td>
+  <td>${r.ciclo}</td>
+  <td>${r.grado}</td>
+  <td>${r.curso}</td>
+  <td>${r.hora}</td>
+  <td>${r.modalidad}</td>
+  <td>
+    <button onclick="editar(${r.id}, '${r.nombre}', '${r.ciclo}', '${r.grado}', '${r.curso}', '${r.hora}', '${r.modalidad}')">Editar</button>
+    <button onclick="eliminar(${r.id})">Eliminar</button>
+  </td>
+`;
+
     tbody.appendChild(fila);
   });
 }

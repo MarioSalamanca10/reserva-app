@@ -80,10 +80,10 @@ app.put('/reservas/:id', (req, res) => {
 app.post('/login', (req, res) => {
   const { usuario, clave } = req.body;
   if (usuario === 'Admin' && clave === 'Admin2410') {
-    console.log("acceso exitoso");
+    alert("acceso exitoso");
     res.json({ acceso: true });
   } else {
-    console.log("acceso denegado");
+    alert ("acceso denegado");
     res.status(401).json({ acceso: false });
   }
 });

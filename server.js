@@ -88,7 +88,42 @@ app.post('/login', (req, res) => {
   }
 });
 
+// fase 2 del proyecto
 
+// Crear tabla para reservas por asignatura
+const createTableAsignatura = `CREATE TABLE IF NOT EXISTS reservas_materias (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  nombre TEXT,
+  materia TEXT,
+  profesor TEXT,
+  modalidad TEXT,
+  hora TEXT
+)`;
+db.prepare(createTableAsignatura).run();
+
+// Ruta para guardar reserva por asignatura con validación de duplicados
+app.post('/reservar-asignatura', (req, res) => {
+  const { nombre, materia, profesor, modalidad, hora } = req.body;
+  if (!nombre || !materia || !profesor || !modalidad || !hora) {
+    return res.status(400).json({ error: 'Faltan datos' });
+  }
+  const checkStmt = db.prepare(`SELECT COUNT(*) AS count FROM reservas_materias WHERE materia = ? AND profesor = ? AND hora = ? AND modalidad = ?`);
+  const result = checkStmt.get(materia, profesor, hora, modalidad);
+  if (result.count > 0) {
+    return res.status(409).json({ error: 'La hora ya está reservada en esa modalidad para ese profesor' });
+  }
+  const stmt = db.prepare(`INSERT INTO reservas_materias (nombre, materia, profesor, modalidad, hora) VALUES (?, ?, ?, ?, ?)`);
+  const info = stmt.run(nombre, materia, profesor, modalidad, hora);
+  res.json({ mensaje: 'Reserva guardada', id: info.lastInsertRowid });
+});
+
+// Ruta para consultar horas reservadas por materia y profesor
+app.get('/horas-asignatura', (req, res) => {
+  const { materia, profesor } = req.query;
+  const stmt = db.prepare(`SELECT hora FROM reservas_materias WHERE materia = ? AND profesor = ?`);
+  const rows = stmt.all(materia, profesor);
+  res.json(rows.map(row => row.hora));
+});
 
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en puerto ${PORT}`);

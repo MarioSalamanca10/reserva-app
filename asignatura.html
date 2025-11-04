@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Reserva por Asignatura</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h2>Reserva con Profesor de Asignatura</h2>
+  <form id="formAsignatura">
+    <label for="nombre">Nombre del estudiante</label>
+    <input type="text" id="nombre" required>
+
+    <label for="materia">Materia</label>
+    <select id="materia" required>
+      <option value="">Seleccione una materia</option>
+      <option value="Artes">Artes</option>
+      <option value="Matematicas">Matemáticas</option>
+      <option value="Ciencias">Ciencias</option>
+      <option value="Lenguaje">Lenguaje</option>
+      <option value="Sociales">Sociales</option>
+      <option value="Ingles">Ingles</option>
+      <option value="Educacion_Fisica">Educación Física</option>
+      <option value="Psicologia">Psicologia</option>
+      <option value="Tecnologia">Tecnología</option>
+      <option value="Frances">Frances</option>      
+    </select>
+
+    <label for="profesor">Profesor</label>
+    <select id="profesor" required></select>
+
+    <label for="modalidad">Modalidad</label>
+    <select id="modalidad" required>
+      <option value="Presencial">Presencial</option>
+      <option value="Virtual">Virtual</option>
+    </select>
+
+    <label for="hora">Hora</label>
+    <select id="hora" required>
+      <option value="">Seleccione una hora</option>
+    </select>
+
+    <button type="submit">Reservar</button>
+  </form>
+  <script src="asignatura.js"></script>
+</body>
+</html>

@@ -2,30 +2,48 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="confirmacion.css">
   <title>Confirmación de Reserva</title>
+  <link rel="stylesheet" href="confirmacion.css">
 </head>
 <body>
-  <div class="card">
-    <h1>Reserva Confirmada</h1>
-    <p>Nombre: <span id="nombreConfirmacion"></span></p>
-    <p>Ciclo: <span id="cicloConfirmacion"></span></p>
-    <p>Grado: <span id="gradoConfirmacion"></span></p>
-    <p>Curso: <span id="cursoConfirmacion"></span></p>
-    <p>Hora: <span id="horaConfirmacion"></span></p>
-    <p>Modalidad: <span id="modalidadConfirmacion"></span></p>
-    <button>Reservar otra reunion</button>
+  <h1>Reserva Confirmada</h1>
+  <p>Nombre: <span id="nombreConfirmacion"></span></p>
+  <p>Ciclo: <span id="cicloConfirmacion"></span></p>
+  <p>Grado: <span id="gradoConfirmacion"></span></p>
+  <p>Curso: <span id="cursoConfirmacion"></span></p>
+  <p>Hora: <span id="horaConfirmacion"></span></p>
+  <p>Modalidad: <span id="modalidadConfirmacion"></span></p>
+
+  <div id="reservaAsignatura" style="display:none">
+    <h2>Reserva por Asignatura</h2>
+    <p>Materia: <span id="materiaConfirmacion"></span></p>
+    <p>Profesor: <span id="profesorConfirmacion"></span></p>
+    <p>Hora: <span id="horaAsignaturaConfirmacion"></span></p>
+    <p>Modalidad: <span id="modalidadAsignaturaConfirmacion"></span></p>
   </div>
-  
+
+  <button onclick="window.location.href='index.html'">Reservar otra reunión</button>
+  <button onclick="window.location.href='asignatura.html'">¿Desea reservar con un profesor de asignatura?</button>
 
   <script>
     const reserva = JSON.parse(localStorage.getItem("ultimaReserva"));
-    document.getElementById("nombreConfirmacion").textContent = reserva.nombre;
-    document.getElementById("cicloConfirmacion").textContent = reserva.ciclo;
-    document.getElementById("gradoConfirmacion").textContent = reserva.grado;
-    document.getElementById("cursoConfirmacion").textContent = reserva.curso;
-    document.getElementById("horaConfirmacion").textContent = reserva.hora;
-    document.getElementById("modalidadConfirmacion").textContent = reserva.modalidad;
+    if (reserva) {
+      document.getElementById("nombreConfirmacion").textContent = reserva.nombre;
+      document.getElementById("cicloConfirmacion").textContent = reserva.ciclo || "-";
+      document.getElementById("gradoConfirmacion").textContent = reserva.grado || "-";
+      document.getElementById("cursoConfirmacion").textContent = reserva.curso || "-";
+      document.getElementById("horaConfirmacion").textContent = reserva.hora;
+      document.getElementById("modalidadConfirmacion").textContent = reserva.modalidad;
+    }
+
+    const reservaAsignatura = JSON.parse(localStorage.getItem("reservaAsignatura"));
+    if (reservaAsignatura) {
+      document.getElementById("reservaAsignatura").style.display = "block";
+      document.getElementById("materiaConfirmacion").textContent = reservaAsignatura.materia;
+      document.getElementById("profesorConfirmacion").textContent = reservaAsignatura.profesor;
+      document.getElementById("horaAsignaturaConfirmacion").textContent = reservaAsignatura.hora;
+      document.getElementById("modalidadAsignaturaConfirmacion").textContent = reservaAsignatura.modalidad;
+    }
   </script>
 </body>
 </html>

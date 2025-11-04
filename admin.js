@@ -111,3 +111,31 @@ function filtrar() {
 }
 
 cargarReservas();
+
+async function cargarReservasAsignaturas() {
+  const res = await fetch("/reservas-materias");
+  const datos = await res.json();
+  const tbody = document.querySelector("#tablaAsignaturas tbody");
+  tbody.innerHTML = "";
+  datos.forEach(r => {
+    const fila = document.createElement("tr");
+    fila.innerHTML = `
+      <td>${r.nombre}</td>
+      <td>${r.materia}</td>
+      <td>${r.profesor}</td>
+      <td>${r.modalidad}</td>
+      <td>${r.hora}</td>
+      <td>
+        <button onclick="eliminarAsignatura(${r.id})">Eliminar</button>
+      </td>
+    `;
+    tbody.appendChild(fila);
+  });
+}
+
+async function eliminarAsignatura(id) {
+  await fetch(`/reservas-materias/${id}`, { method: "DELETE" });
+  cargarReservasAsignaturas();
+}
+
+cargarReservasAsignaturas();

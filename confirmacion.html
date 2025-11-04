@@ -4,26 +4,42 @@
   <meta charset="UTF-8">
   <title>Confirmación de Reserva</title>
   <link rel="stylesheet" href="confirmacion.css">
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    .container { max-width: 600px; margin: auto; }
+    h1, h2 { text-align: center; }
+    p { margin: 5px 0; }
+    .reserva-box { border: 1px solid #ccc; padding: 15px; margin-bottom: 20px; border-radius: 8px; }
+    button { margin: 10px; padding: 10px 20px; }
+  </style>
 </head>
 <body>
-  <h1>Reserva Confirmada</h1>
-  <p>Nombre: <span id="nombreConfirmacion"></span></p>
-  <p>Ciclo: <span id="cicloConfirmacion"></span></p>
-  <p>Grado: <span id="gradoConfirmacion"></span></p>
-  <p>Curso: <span id="cursoConfirmacion"></span></p>
-  <p>Hora: <span id="horaConfirmacion"></span></p>
-  <p>Modalidad: <span id="modalidadConfirmacion"></span></p>
+  <div class="container">
+    <h1>Reserva Confirmada</h1>
 
-  <div id="reservaAsignatura" style="display:none">
-    <h2>Reserva por Asignatura</h2>
-    <p>Materia: <span id="materiaConfirmacion"></span></p>
-    <p>Profesor: <span id="profesorConfirmacion"></span></p>
-    <p>Hora: <span id="horaAsignaturaConfirmacion"></span></p>
-    <p>Modalidad: <span id="modalidadAsignaturaConfirmacion"></span></p>
+    <div class="reserva-box">
+      <h2>Reserva con Director de Curso</h2>
+      <p>Nombre: <span id="nombreConfirmacion"></span></p>
+      <p>Ciclo: <span id="cicloConfirmacion"></span></p>
+      <p>Grado: <span id="gradoConfirmacion"></span></p>
+      <p>Curso: <span id="cursoConfirmacion"></span></p>
+      <p>Hora: <span id="horaConfirmacion"></span></p>
+      <p>Modalidad: <span id="modalidadConfirmacion"></span></p>
+    </div>
+
+    <div class="reserva-box" id="reservaAsignatura" style="display:none">
+      <h2>Reserva con Profesor de Asignatura</h2>
+      <p>Materia: <span id="materiaConfirmacion"></span></p>
+      <p>Profesor: <span id="profesorConfirmacion"></span></p>
+      <p>Hora: <span id="horaAsignaturaConfirmacion"></span></p>
+      <p>Modalidad: <span id="modalidadAsignaturaConfirmacion"></span></p>
+    </div>
+
+    <div style="text-align:center">
+      <button onclick="window.location.href='index.html'">Reservar otra reunión</button>
+      <button onclick="window.location.href='asignatura.html'">¿Desea reservar con un profesor de asignatura?</button>
+    </div>
   </div>
-
-  <button onclick="window.location.href='index.html'">Reservar otra reunión</button>
-  <button onclick="window.location.href='asignatura.html'">¿Desea reservar con un profesor de asignatura?</button>
 
   <script>
     const reserva = JSON.parse(localStorage.getItem("ultimaReserva"));

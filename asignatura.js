@@ -38,11 +38,10 @@ document.getElementById("materia").addEventListener("change", () => {
 document.getElementById("profesor").addEventListener("change", async () => {
   const materia = document.getElementById("materia").value;
   const profesor = document.getElementById("profesor").value;
-  const modalidad = document.getElementById("modalidad").value;
   const selectHoras = document.getElementById("hora");
   selectHoras.innerHTML = "<option value=''>Seleccione una hora</option>";
 
-  if (materia && profesor && modalidad) {
+  if (materia && profesor) {
     try {
       const res = await fetch(`${API_URL}/horas-asignatura?materia=${materia}&profesor=${profesor}`);
       const horasReservadas = await res.json();
@@ -82,7 +81,7 @@ document.getElementById("formAsignatura").addEventListener("submit", async (e) =
   }
 
   if (res.ok) {
-    alert("Reserva realizada correctamente");
+    localStorage.setItem("reservaAsignatura", JSON.stringify(data));
     window.location.href = "confirmacion.html";
   } else {
     alert("Error al reservar");

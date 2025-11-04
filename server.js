@@ -90,6 +90,7 @@ app.post('/login', (req, res) => {
 
 // fase 2 del proyecto
 
+
 // Crear tabla para reservas por asignatura
 const createTableAsignatura = `CREATE TABLE IF NOT EXISTS reservas_materias (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -115,6 +116,20 @@ app.post('/reservar-asignatura', (req, res) => {
   const stmt = db.prepare(`INSERT INTO reservas_materias (nombre, materia, profesor, modalidad, hora) VALUES (?, ?, ?, ?, ?)`);
   const info = stmt.run(nombre, materia, profesor, modalidad, hora);
   res.json({ mensaje: 'Reserva guardada', id: info.lastInsertRowid });
+});
+
+// Ruta para consultar reservas por asignatura
+app.get('/reservas-materias', (req, res) => {
+  const rows = db.prepare(`SELECT * FROM reservas_materias ORDER BY id DESC`).all();
+  res.json(rows);
+});
+
+// Ruta para eliminar reserva por asignatura
+app.delete('/reservas-materias/:id', (req, res) => {
+  const { id } = req.params;
+  const stmt = db.prepare('DELETE FROM reservas_materias WHERE id = ?');
+  const info = stmt.run(id);
+  res.json({ mensaje: 'Reserva eliminada', cambios: info.changes });
 });
 
 // Ruta para consultar horas reservadas por materia y profesor

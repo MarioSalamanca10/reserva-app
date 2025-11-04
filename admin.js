@@ -115,7 +115,9 @@ cargarReservas();
 async function cargarReservasAsignaturas() {
   const res = await fetch("/reservas-materias");
   const datos = await res.json();
-  const tbody = document.querySelector("#tablaAsignaturas tbody");
+  const tabla = document.getElementById("tablaAsignaturas");
+  if (!tabla) return;
+  const tbody = tabla.querySelector("tbody");
   tbody.innerHTML = "";
   datos.forEach(r => {
     const fila = document.createElement("tr");
@@ -138,4 +140,4 @@ async function eliminarAsignatura(id) {
   cargarReservasAsignaturas();
 }
 
-cargarReservasAsignaturas();
+document.addEventListener("DOMContentLoaded", cargarReservasAsignaturas);

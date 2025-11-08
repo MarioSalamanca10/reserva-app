@@ -1,7 +1,21 @@
 
+//redireccion de login
 if (localStorage.getItem("adminAutenticado") !== "true") {
   window.location.href = "login.html";
 }
+
+//cerrar sesion al cerrar la pestaña
+window.addEventListener("unload", () => {
+  localStorage.removeItem("adminAutenticado");
+});
+
+//boton cerrar sesion
+function cerrarSesion() {
+  localStorage.removeItem("adminAutenticado");
+  window.location.href = "login.html";
+}
+
+
 
 const API_URL = "https://reserva-app-1.onrender.com";
 let reservasGlobal = [];

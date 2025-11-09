@@ -155,3 +155,10 @@ async function eliminarAsignatura(id) {
 }
 
 document.addEventListener("DOMContentLoaded", cargarReservasAsignaturas);
+
+
+function mostrarSeccion(id) {
+  const secciones = document.querySelectorAll('.seccion-tabla');
+  secciones.forEach(sec => sec.style.display = 'none');
+  document.getElementById(id).style.display = 'block';
+}

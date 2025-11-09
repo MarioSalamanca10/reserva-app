@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -7,6 +6,13 @@
   <title>Reservas por Profesor</title>
 </head>
 <body>
+
+<div class="menu-navegacion">
+  <button onclick="mostrarSeccion('tablaReservas')">Reservas Generales</button>
+  <button onclick="mostrarSeccion('tablaAsignaturas')">Reservas por Asignatura</button>
+</div>
+
+
   <div class="container">
     <h1>Reservas por Profesor</h1>
     <div class="filters">
@@ -17,7 +23,7 @@
         <option value="">Todos los cursos</option>
       </select>
     </div>
-    <table>
+    <table id="tablaReservas" class="seccion-tabla">
       <thead>
         <tr>
           <th>Nombre</th>

@@ -1,26 +1,42 @@
-
-//redireccion de login
+// Redirección de login
 if (localStorage.getItem("adminAutenticado") !== "true") {
   window.location.href = "login.html";
 }
 
-//cerrar sesion al cerrar la pestaña
+// Cerrar sesión al cerrar la pestaña
 window.addEventListener("unload", () => {
   localStorage.removeItem("adminAutenticado");
 });
 
-//boton cerrar sesion
+// Botón cerrar sesión
 function cerrarSesion() {
   localStorage.removeItem("adminAutenticado");
   window.location.href = "login.html";
 }
 
-
-
 const API_URL = "https://reserva-app-1.onrender.com";
 let reservasGlobal = [];
 let idEditar = null;
 
+// Mostrar secciones según el botón del menú
+function mostrarSeccion(id) {
+  const secciones = document.querySelectorAll('.seccion-tabla');
+  secciones.forEach(sec => sec.style.display = 'none');
+
+  const seleccionada = document.getElementById(id);
+  if (seleccionada) {
+    seleccionada.style.display = 'block';
+
+    // Cargar datos solo cuando se muestra la sección
+    if (id === 'tablaReservas') {
+      cargarReservas();
+    } else if (id === 'tablaAsignaturas') {
+      cargarReservasAsignaturas();
+    }
+  }
+}
+
+// Cargar reservas generales
 async function cargarReservas() {
   const res = await fetch(`${API_URL}/reservas`);
   reservasGlobal = await res.json();
@@ -30,22 +46,22 @@ async function cargarReservas() {
 
 function mostrarTabla(reservas) {
   const tbody = document.querySelector("#tablaReservas tbody");
+  if (!tbody) return;
   tbody.innerHTML = "";
   reservas.forEach(r => {
     const fila = document.createElement("tr");
-fila.innerHTML = `
-  <td>${r.nombre}</td>
-  <td>${r.ciclo}</td>
-  <td>${r.grado}</td>
-  <td>${r.curso}</td>
-  <td>${r.hora}</td>
-  <td>${r.modalidad}</td>
-  <td>
-    <button onclick="editar(${r.id}, '${r.nombre}', '${r.ciclo}', '${r.grado}', '${r.curso}', '${r.hora}', '${r.modalidad}')">Editar</button>
-    <button onclick="eliminar(${r.id})">Eliminar</button>
-  </td>
-`;
-
+    fila.innerHTML = `
+      <td>${r.nombre}</td>
+      <td>${r.ciclo}</td>
+      <td>${r.grado}</td>
+      <td>${r.curso}</td>
+      <td>${r.hora}</td>
+      <td>${r.modalidad}</td>
+      <td>
+        <button onclick="editar(${r.id}, '${r.nombre}', '${r.ciclo}', '${r.grado}', '${r.curso}', '${r.hora}', '${r.modalidad}')">Editar</button>
+        <button onclick="eliminar(${r.id})">Eliminar</button>
+      </td>
+    `;
     tbody.appendChild(fila);
   });
 }
@@ -56,6 +72,8 @@ function llenarFiltros() {
 
   const filtroGrado = document.getElementById("filtroGrado");
   const filtroCurso = document.getElementById("filtroCurso");
+
+  if (!filtroGrado || !filtroCurso) return;
 
   filtroGrado.innerHTML = '<option value="">Todos</option>';
   grados.forEach(g => {
@@ -112,8 +130,8 @@ function eliminar(id) {
     .then(() => cargarReservas());
 }
 
-document.getElementById("filtroGrado").addEventListener("change", () => filtrar());
-document.getElementById("filtroCurso").addEventListener("change", () => filtrar());
+document.getElementById("filtroGrado")?.addEventListener("change", () => filtrar());
+document.getElementById("filtroCurso")?.addEventListener("change", () => filtrar());
 
 function filtrar() {
   const grado = document.getElementById("filtroGrado").value;
@@ -124,8 +142,7 @@ function filtrar() {
   mostrarTabla(filtradas);
 }
 
-cargarReservas();
-
+// Cargar reservas por asignatura
 async function cargarReservasAsignaturas() {
   const res = await fetch("/reservas-materias");
   const datos = await res.json();
@@ -152,13 +169,4 @@ async function cargarReservasAsignaturas() {
 async function eliminarAsignatura(id) {
   await fetch(`/reservas-materias/${id}`, { method: "DELETE" });
   cargarReservasAsignaturas();
-}
-
-document.addEventListener("DOMContentLoaded", cargarReservasAsignaturas);
-
-
-function mostrarSeccion(id) {
-  const secciones = document.querySelectorAll('.seccion-tabla');
-  secciones.forEach(sec => sec.style.display = 'none');
-  document.getElementById(id).style.display = 'block';
 }

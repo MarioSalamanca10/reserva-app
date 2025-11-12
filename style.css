@@ -68,3 +68,46 @@ form button {
 form button:hover {
   background-color: #16a085;
 }
+
+
+@media (max-width: 768px) {
+  body {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-position: center center;
+    background-size: cover;
+    padding: 20px;
+  }
+
+  .formulario-contenedor {
+    width: 90%;
+    margin: 20px auto;
+    padding: 30px 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+
+  header h1 {
+    font-size: 22px;
+    text-align: center;
+  }
+
+  form {
+    gap: 12px;
+  }
+
+  form label {
+    font-size: 14px;
+  }
+
+  form input,
+  form select {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  form button {
+    font-size: 15px;
+    padding: 10px;
+  }
+}

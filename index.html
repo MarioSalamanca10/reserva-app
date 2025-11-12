@@ -1,63 +1,70 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
     <title>Reserva Horarios</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>Bienvenido Username</h1>
-    </header>
-    <main>
-        <form action="submit" method="post" id="reservas">
-            <div class="txt_nombre">
-                <label for="nombre">Ingrese el nombre del estudiante</label>
-                <input type="text" name="nombre" id="nombre" placeholder="" required>    
-            </div>
-            <div class="picklist_ciclo">
-                <label for="ciclos">Ciclo del estudiante</label>
-                <select name="ciclos" id="ciclos" required>
-                    <option value="s">Seleccione una opción</option>
-                    <option value="Preescolar">Preescolar (Pioners, FG, GR, TR)</option>
-                    <option value="Primaria_Baja">Primaria Baja (1°, 2°, 3°)</option>
-                    <option value="Primaria_Alta">Primaria Alta (4°, 5°)</option>
-                    <option value="Escuela_Media">Escuela Media (6°, 7°)</option>
-                    <option value="Escuela_Alta">Escuela Alta (8°, 9°, 10°, 11°)</option>
-                </select>
-            </div>
-            <div class="picklist_grado">
-                <label for="grados">Grado</label>
-                <select name="grados" id="grados" required>
-                    <option value="">Seleccione una opción</option>
-                </select>
-            </div>
+    <div class="formulario-contenedor">
+        <header>
+            <h1>Bienvenido Username</h1>
+        </header>
+        <main>
+            <form action="submit" method="post" id="reservas">
+                <div class="txt_nombre">
+                    <label for="nombre">Ingrese el nombre del estudiante</label>
+                    <input type="text" name="nombre" id="nombre" required>    
+                </div>
 
-            <div class="picklist_curso">
-                <label for="cursos">Curso</label>
-                <select name="cursos" id="cursos" required>
-                    <option value="">Seleccione una opción</option>
-                </select>
-            </div>
-            <div class="picklist_horario">
-                <label for="horas">Disponibilidad de horarios</label>
-                <select name="horas" id="horas" required>
-                    <option value="">Seleccione una opción</option>
-                </select>
-            </div>
-            <div class="picklist_modalidad">
-                <label for="modalidad">Modalidad</label>
-                <select name="modalidad" id="modalidad">
-                    <option value="presencial">Presencial</option>
-                    <option value="virtual">Virtual</option>
-                </select>
-            </div>
-            <button type="submit" > Reservar </button>                      
-        </form>
-    </main>
+                <div class="picklist_ciclo">
+                    <label for="ciclos">Ciclo del estudiante</label>
+                    <select name="ciclos" id="ciclos" required>
+                        <option value="s">Seleccione una opción</option>
+                        <option value="Preescolar">Preescolar (Pioners, FG, GR, TR)</option>
+                        <option value="Primaria_Baja">Primaria Baja (1°, 2°, 3°)</option>
+                        <option value="Primaria_Alta">Primaria Alta (4°, 5°)</option>
+                        <option value="Escuela_Media">Escuela Media (6°, 7°)</option>
+                        <option value="Escuela_Alta">Escuela Alta (8°, 9°, 10°, 11°)</option>
+                    </select>
+                </div>
+
+                <div class="picklist_grado">
+                    <label for="grados">Grado</label>
+                    <select name="grados" id="grados" required>
+                        <option value="">Seleccione una opción</option>
+                    </select>
+                </div>
+
+                <div class="picklist_curso">
+                    <label for="cursos">Curso</label>
+                    <select name="cursos" id="cursos" required>
+                        <option value="">Seleccione una opción</option>
+                    </select>
+                </div>
+
+                <div class="picklist_horario">
+                    <label for="horas">Disponibilidad de horarios</label>
+                    <select name="horas" id="horas" required>
+                        <option value="">Seleccione una opción</option>
+                    </select>
+                </div>
+
+                <div class="picklist_modalidad">
+                    <label for="modalidad">Modalidad</label>
+                    <select name="modalidad" id="modalidad">
+                        <option value="presencial">Presencial</option>
+                        <option value="virtual">Virtual</option>
+                    </select>
+                </div>
+
+                <button type="submit">Reservar</button>                      
+            </form>
+        </main>
+    </div>
 
     <script src="dependencias.js"></script>
-    
 </body>
 </html>

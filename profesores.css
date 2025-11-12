@@ -1,10 +1,15 @@
-
 body {
   font-family: 'Segoe UI', sans-serif;
   background-color: #eef2f7;
   margin: 0;
-  padding: 20px;
+  padding: 0;
   color: #333;
+}
+
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 20px;
 }
 
 header {
@@ -88,12 +93,4 @@ tbody tr:nth-child(even) {
 
 tbody tr:hover {
   background-color: #ecf0f1;
-}
-
-.filtros select {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 14px;
-  min-width: 180px;
 }

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -7,80 +8,69 @@
   <link rel="stylesheet" href="profesores.css" />
 </head>
 <body>
-  <header>
-    <h1>Panel de Reservas por Profesor</h1>
-  </header>
+  <div class="container">
+    <header>
+      <h1>Panel de Reservas por Profesor</h1>
+    </header>
 
-  <div class="menu-navegacion">
-    <button onclick="mostrarSeccion('tablaReservas')">Reservas Generales</button>
-    <button onclick="mostrarSeccion('tablaAsignaturas')">Reservas por Asignatura</button>
-  </div>
-
-  <!-- Sección de reservas generales -->
-  <div id="tablaReservas" class="seccion-tabla" style="display: none;">
-    <div class="filtros">
-      <input type="text" id="filtroNombre" placeholder="Buscar por nombre..." />
-      <select id="filtroGrado">
-        <option value="">Grado</option>
-      </select>
-      <select id="filtroCurso">
-        <option value="">Curso</option>
-      </select>
+    <div class="menu-navegacion">
+      <button onclick="mostrarSeccion('seccionGeneral')">Reservas Generales</button>
+      <button onclick="mostrarSeccion('seccionAsignaturas')">Reservas por Asignatura</button>
     </div>
 
-    <div class="tabla-contenedor">
-      <table>
-        <thead>
-          <tr>
-            <th>Nombre</th>
-            <th>Ciclo</th>
-            <th>Grado</th>
-            <th>Curso</th>
-            <th>Hora</th>
-            <th>Modalidad</th>
-          </tr>
-        </thead>
-        <tbody id="tablaReservas"></tbody>
-      </table>
+    <!-- Sección de reservas generales -->
+    <div id="seccionGeneral" class="seccion-tabla" style="display: none;">
+      <div class="filtros">
+        <input type="text" id="filtroNombre" placeholder="Buscar por nombre..." />
+        <select id="filtroGrado"><option value="">Grado</option></select>
+        <select id="filtroCurso"><option value="">Curso</option></select>
+      </div>
+
+      <div class="tabla-contenedor">
+        <table>
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Ciclo</th>
+              <th>Grado</th>
+              <th>Curso</th>
+              <th>Hora</th>
+              <th>Modalidad</th>
+            </tr>
+          </thead>
+          <tbody id="tablaReservas"></tbody>
+        </table>
+      </div>
     </div>
-  </div>
 
-  <!-- Sección de reservas por asignatura -->
-  <div id="tablaAsignaturas" class="seccion-tabla" style="display: none;">
-    
-<div class="filtros">
-  <select id="filtroMateria">
-    <option value="">Asignatura</option>
-  </select>
+    <!-- Sección de reservas por asignatura -->
+    <div id="seccionAsignaturas" class="seccion-tabla" style="display: none;">
+      <div class="filtros">
+        <select id="filtroMateria"><option value="">Asignatura</option></select>
+        <select id="filtroProfesor"><option value="">Profesor</option></select>
+        <select id="ordenHora">
+          <option value="asc">Hora: más temprano</option>
+          <option value="desc">Hora: más tarde</option>
+        </select>
+      </div>
 
-  <select id="filtroProfesor">
-    <option value="">Profesor</option>
-  </select>
-
-  <select id="ordenHora">
-    <option value="asc">Hora: más temprano</option>
-    <option value="desc">Hora: más tarde</option>
-  </select>
-</div>
-
-<div class="tabla-contenedor">
-  <table>
-    <thead>
-      <tr>
-        <th>Nombre</th>
-        <th>Materia</th>
-        <th>Profesor</th>
-        <th>Modalidad</th>
-        <th>Hora</th>
-      </tr>
-    </thead>
-    <tbody id="tablaAsignaturas"></tbody>
-  </table>
-</div>
-
+      <div class="tabla-contenedor">
+        <table>
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Materia</th>
+              <th>Profesor</th>
+              <th>Modalidad</th>
+              <th>Hora</th>
+            </tr>
+          </thead>
+          <tbody id="tablaAsignaturas"></tbody>
+        </table>
+      </div>
+    </div>
   </div>
 
   <script src="profesores.js"></script>
 </body>
 </html>
-

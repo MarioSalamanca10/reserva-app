@@ -6,7 +6,7 @@ body {
   font-family: 'Segoe UI', sans-serif;
   background-image: url('img/reservas-app.jpg'); /* Cambia esta ruta según tu carpeta */
   background-size: cover;
-  background-position: center right;
+  background-position: center 10%;
   background-repeat: no-repeat;
   min-height: 100vh;
   display: flex;

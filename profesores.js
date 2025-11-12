@@ -11,7 +11,7 @@ function mostrarSeccion(id) {
   if (seleccionada) {
     seleccionada.style.display = 'block';
 
-    if (id === 'tablaGeneral') {
+    if (id === 'tablaReservas') {
       cargarReservas();
     } else if (id === 'tablaAsignaturas') {
       cargarReservasAsignaturas();

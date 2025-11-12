@@ -11,9 +11,9 @@ function mostrarSeccion(id) {
   if (seleccionada) {
     seleccionada.style.display = 'block';
 
-    if (id === 'tablaReservas') {
+    if (id === 'seccionGeneral') {
       cargarReservas();
-    } else if (id === 'tablaAsignaturas') {
+    } else if (id === 'seccionAsignaturas') {
       cargarReservasAsignaturas();
     }
   }
@@ -176,12 +176,9 @@ function filtrarAsignaturas() {
   mostrarTablaAsignaturas(filtradas);
 }
 
-// Convierte hora en formato "8:20 AM" a número para ordenar
 function convertirHora(horaStr) {
   const [hora, minuto] = horaStr.replace(" AM", "").replace(" PM", "").split(":").map(Number);
   let total = hora * 60 + minuto;
   if (horaStr.includes("PM") && hora < 12) total += 12 * 60;
   return total;
 }
-
-

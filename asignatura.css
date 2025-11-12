@@ -8,42 +8,46 @@ body {
   background-position: center right;
   background-repeat: no-repeat;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   min-height: 100vh;
 }
 
-form {
+.formulario-asignatura {
+  width: 380px;
+  margin-right: 6%;
+  padding: 30px;
   background-color: rgba(255, 255, 255, 0.95);
-  padding: 40px;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  width: 420px;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
 }
 
-h2 {
+.formulario-asignatura h2 {
   text-align: center;
   color: #2c3e50;
   margin-bottom: 20px;
 }
 
-label {
+.formulario-asignatura form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.formulario-asignatura label {
   font-weight: bold;
   color: #2c3e50;
 }
 
-input,
-select {
+.formulario-asignatura select,
+.formulario-asignatura input {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 6px;
   font-size: 14px;
 }
 
-button {
+.formulario-asignatura button {
   background-color: #1abc9c;
   color: white;
   border: none;
@@ -51,35 +55,21 @@ button {
   border-radius: 6px;
   font-size: 16px;
   cursor: pointer;
-  transition: background 0.3s ease;
 }
 
-button:hover {
+.formulario-asignatura button:hover {
   background-color: #16a085;
 }
 
 @media (max-width: 768px) {
-  form {
+  body {
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .formulario-asignatura {
     width: 90%;
+    margin: 20px auto;
     padding: 30px 20px;
-  }
-
-  h2 {
-    font-size: 22px;
-  }
-
-  label {
-    font-size: 14px;
-  }
-
-  input,
-  select {
-    font-size: 14px;
-    padding: 8px;
-  }
-
-  button {
-    font-size: 15px;
-    padding: 10px;
   }
 }

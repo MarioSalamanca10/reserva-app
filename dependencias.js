@@ -29,10 +29,10 @@ const lista_cursos = {
 };
 
 const HorasDisponibles = [
-  "8:20 AM", "8:40 AM", "9:00 AM", "9:20 AM", "9:40 AM",
-  "10:20 AM", "10:40 AM", "11:00 AM", "11:20 AM", "11:40 AM",
+  "8:40 AM", "9:00 AM", "9:20 AM", "9:40 AM",
+  "10:20 AM", "11:00 AM", "11:20 AM", "11:40 AM",
   "12:00 M", "12:20 PM", "12:40 PM", "2:00 PM", "2:20 PM",
-  "2:40 PM", "3:00 PM", "3:20 PM"
+  "2:40 PM", "3:00 PM", "3:20 PM", "3:40 PM"
 ];
 
 // Referencias a elementos del DOM

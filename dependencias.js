@@ -14,7 +14,7 @@ const lista_cursos = {
   "Pioneros": ["Pioneros"],
   "First Garten": ["A", "B"],
   "Garten": ["A", "B", "C", "D"],
-  "Transition": ["A", "B", "C", "D"],
+  "Transition": ["A", "B", "C", "D", "E", "F"],
   "Primero": ["A", "B", "C", "D", "E", "F"],
   "Segundo": ["A", "B", "C", "D", "E", "F"],
   "Tercero": ["A", "B", "C", "D", "E", "F"],

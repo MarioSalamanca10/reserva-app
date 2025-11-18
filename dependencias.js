@@ -24,8 +24,7 @@ const lista_cursos = {
   "Septimo": ["A", "B", "C", "D"],
   "Octavo": ["A", "B", "C", "D"],
   "Noveno": ["A", "B", "C", "D"],
-  "Decimo": ["A", "B", "C"],
-  "Once": ["A", "B", "C"]
+  "Decimo": ["A", "B", "C"]
 };
 
 const HorasDisponibles = [

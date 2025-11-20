@@ -12,7 +12,9 @@ body {
   align-items: center;
   min-height: 100vh;
 }
-
+.none-ocultar{
+  display: none;
+}
 .formulario-asignatura {
   width: 380px;
   margin-right: 6%;
@@ -73,3 +75,4 @@ body {
     padding: 30px 20px;
   }
 }
+
